@@ -1,0 +1,29 @@
+03.19 19:12
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>测试页面</title>
+</head>
+<body>
+    <div class="text">Hello world!</div>
+    <script>
+        fetch('/myname-hgs/zh.json')
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP 错误 ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.querySelector('.text').textContent = data.greeting;
+            })
+            .catch(error => {
+                console.error('加载失败:', error);
+                document.querySelector('.text').textContent = "数据加载失败";
+            });
+    </script>
+</body>
+</html>
+
